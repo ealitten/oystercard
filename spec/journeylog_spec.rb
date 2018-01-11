@@ -1,11 +1,13 @@
-require "journeylog"
+require 'journeylog'
 
 describe JourneyLog do
-  let (:journey) { double :journey, finish: journey }
+  let (:journey) { double :journey, finish: nil }
+  let (:old_journey) { double :journey, finish: nil }
   let (:journey_class) { double :journey_class, new: journey }
   let (:entry_station) { double :entry_station }
   let (:exit_station) { double :exit_station }
   subject(:journeylog) { described_class.new(journey_class) }
+
 
   describe "initialize" do
     it "should create empty journey history" do
@@ -16,12 +18,12 @@ describe JourneyLog do
 
   context "a journey already exists" do
 
-    # subject(:journeylog) { described_class.new(journey_class, journey) }
+    subject(:journeylog) { described_class.new(journey_class, old_journey) }
 
     describe "#start" do
-      it "closes old journey & starts new one if one already exists" do
+      it "closes old journey & starts new one " do
         journeylog.start(entry_station)
-        expect(journeylog.journeys).to include journey
+        expect(journeylog.journeys).to include old_journey
       end
     end
 
@@ -47,6 +49,4 @@ describe JourneyLog do
     end
 
   end
-
-
 end

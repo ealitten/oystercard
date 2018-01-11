@@ -20,12 +20,14 @@ class Oystercard
 
   def touch_in(entry_station)
     raise "insufficient balance for journey" if insufficient_funds?
+    # ask JL if current journey incomplete? ==> deduct
+    deduct(@journey_log.current_journey.fare) if @journey_log.current_journey.incomplete?
     @journey_log.start(entry_station)
   end
 
   def touch_out(exit_station)
     @journey_log.finish(exit_station)
-    deduct(@journey_log.journeys[-1].fare)
+    deduct(@journey_log.journeys.last.fare)
   end
 
   def journeys
