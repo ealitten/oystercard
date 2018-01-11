@@ -17,6 +17,13 @@ describe Journey do
     end
   end
 
+  describe "#finish" do
+
+    it "should return self on completion" do
+      expect(journey.finish(exit_station)).to eq journey
+    end
+
+  end
 
   describe "#fare" do
 
@@ -38,6 +45,7 @@ describe Journey do
       journey = Journey.new
       expect(journey.fare).to eq 6.00
     end
+
   end
 
 end

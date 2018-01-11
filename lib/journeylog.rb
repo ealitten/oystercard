@@ -7,7 +7,6 @@ class JourneyLog
   end
 
   def start(station)
-    #create a new journey
     close_journey if @current_journey
     @current_journey = create_journey(station)
   end
