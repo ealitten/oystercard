@@ -1,6 +1,9 @@
 require_relative 'journey'
 
 class JourneyLog
+
+  attr_reader :current_journey
+
   def initialize(journey_class = Journey, existing_journey = nil)
     @journey_class = journey_class
     @current_journey = existing_journey
@@ -19,10 +22,6 @@ class JourneyLog
 
   def journeys
     @history.dup
-  end
-
-  def current_journey
-    @current_journey.dup
   end
 
   private
